@@ -34,6 +34,7 @@ export class ShoppingCartComponent implements OnInit {
 
   onRemoveClecked(car: Car) {
     this.onRemove.emit(car);
+    this.overId = undefined;
   }
 
 }

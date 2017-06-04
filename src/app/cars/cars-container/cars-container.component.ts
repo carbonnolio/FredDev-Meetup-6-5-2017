@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ISubscription } from 'rxjs/Subscription';
+
 import { Car } from './../interfaces/car';
+
 import { DataService } from './../../car-services/data.service';
 import { ShopService } from './../../car-services/shop.service';
 
@@ -8,7 +11,7 @@ import { ShopService } from './../../car-services/shop.service';
   templateUrl: './cars-container.component.html',
   styleUrls: ['./cars-container.component.css'],
 })
-export class CarsContainerComponent implements OnInit {
+export class CarsContainerComponent implements OnInit, OnDestroy {
 
   private total = 0;
 
@@ -16,10 +19,12 @@ export class CarsContainerComponent implements OnInit {
   private carList: Car[];
   private purchasedCars: Car[] = [];
 
+  private dataProvider: ISubscription;
+
   constructor(private dataService: DataService, private shopService: ShopService) { }
 
   ngOnInit() {
-    this.dataService.getCars().subscribe(x => {
+    this.dataProvider = this.dataService.getCars().subscribe(x => {
       this.originalCarlist = x;
       this.carList = this.originalCarlist;
     },
@@ -48,6 +53,10 @@ export class CarsContainerComponent implements OnInit {
 
   onSearchModelChange(filterVal: string) {
     this.carList = this.shopService.filterCars(filterVal, this.originalCarlist);
+  }
+
+  ngOnDestroy() {
+    this.dataProvider.unsubscribe();
   }
 
 }
