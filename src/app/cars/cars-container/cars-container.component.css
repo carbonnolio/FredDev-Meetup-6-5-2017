@@ -1,0 +1,16 @@
+.spinner{
+  position: absolute;
+  left: 43%;
+  top: 40%;
+  font-size: 200%;
+  text-align: center;
+}
+
+.shopping-cart {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.margin {
+    margin-top: 2em;
+}

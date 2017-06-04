@@ -1,0 +1,34 @@
+[
+{
+"Id": 1,
+"Make": "Honda",
+"Model": "Accord",
+"Year": 2017,
+"Image": "assets/honda_accord_2017.jpg",
+"Price": 19999
+},
+{
+"Id": 2,
+"Make": "Ford",
+"Model": "Explorer",
+"Year": 2016,
+"Image": "assets/ford_explorer_2016.jpg",
+"Price": 29999
+},
+{
+"Id": 3,
+"Make": "Toyota",
+"Model": "Camry",
+"Year": 2016,
+"Image": "assets/toyota_camry_2016.jpg",
+"Price": 18999
+},
+{
+"Id": 4,
+"Make": "Nissan",
+"Model": "Murano",
+"Year": 2017,
+"Image": null,
+"Price": 25999
+}
+]

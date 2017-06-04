@@ -1,0 +1,10 @@
+.bordered-first:first-child {
+  border: 2px solid #b3d9ff;
+}
+
+.bordered:not(:first-child) {
+  border-bottom: 2px solid #b3d9ff;
+  border-left: 2px solid #b3d9ff;
+  border-right: 2px solid #b3d9ff;
+}
+

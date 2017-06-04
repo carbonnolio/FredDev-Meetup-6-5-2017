@@ -1,0 +1,9 @@
+<div class="row" *ngIf="car">
+  <div class="col-xs-2 col-md-2"><img [src]="carService.assignImage(car.Image)" alt="Car Image" width="200" height="100"></div>
+  <div class="col-xs-2 col-md-2 vcenter-text">{{car.Year}}</div>
+  <div class="col-xs-4 col-md-4 vcenter-text">{{car.Make}} {{car.Model}}</div>
+  <div class="col-xs-2 col-md-2 vcenter-text">{{car.Price | currency:'USD':true:'1.2-2'}}</div>
+  <div class="col-xs-2 col-md-2">
+    <button class="buy-button" (click)="onAddClicked()">Add To Cart</button>
+  </div>
+</div>

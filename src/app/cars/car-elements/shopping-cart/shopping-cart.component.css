@@ -1,0 +1,22 @@
+.dimmed {
+  position: relative;
+  cursor: pointer;
+}
+
+.dimmed:after {
+  content: "REMOVE";
+  font-size: 2em;
+  text-align: center;
+  padding-top: 20%;
+  z-index: 10;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.cart-element {
+    margin: 1.2em;
+}

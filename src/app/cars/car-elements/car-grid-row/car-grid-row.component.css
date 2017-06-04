@@ -1,0 +1,23 @@
+.vcenter-text {
+    padding-top: 0.5em;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #0059b3;
+}
+
+.buy-button {
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    background-color: #0059b3;
+    border: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.buy-button:hover {
+    cursor: pointer;
+    background-color: #b3d9ff;
+    color: grey;
+}

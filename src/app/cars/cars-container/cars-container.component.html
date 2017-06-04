@@ -1,0 +1,26 @@
+<div *ngIf="carList; else wait">
+    <div class="row margin">
+        <input *ngIf="originalCarlist.length > 0" type="text" class="form-control" ngModel (ngModelChange)="onSearchModelChange($event)"
+            placeholder="Search...">
+    </div>
+    <div class="margin">
+        <car-grid [cars]="carList" (onAdd)="onAddClicked($event)"></car-grid>
+    </div>
+    <div class="row margin">
+        <div class="col-xs-3 col-md-3 shopping-cart">
+            <p>Shopping Cart:</p>
+        </div>
+        <div *ngIf="purchasedCars.length > 0" class="col-xs-3 col-md-3 offset-xs-6 offset-md-6 shopping-cart">
+            <p>Total: {{total | currency:'USD':true:'1.2-2'}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <shopping-cart [purchasedCars]="purchasedCars" (onRemove)="onRemoveClicked($event)"></shopping-cart>
+    </div>
+</div>
+
+<ng-template #wait>
+    <div class="spinner">
+        <i class="fa fa-circle-o-notch fa-5x fa-spin"></i>
+    </div>
+</ng-template>

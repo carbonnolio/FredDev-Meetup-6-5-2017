@@ -1,0 +1,5 @@
+<div *ngIf="cars && cars.length > 0">
+  <div *ngFor="let car of cars" class="bordered-first bordered">
+    <car-grid-row [car]="car" (onAdd)="onAddClicked($event)"></car-grid-row>
+  </div>
+</div>
