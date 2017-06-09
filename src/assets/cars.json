@@ -4,7 +4,7 @@
 "Make": "Honda",
 "Model": "Accord",
 "Year": 2017,
-"Image": "assets/honda_accord_2017.jpg",
+"Image": null,
 "Price": 19999
 },
 {
@@ -12,7 +12,7 @@
 "Make": "Ford",
 "Model": "Explorer",
 "Year": 2016,
-"Image": "assets/ford_explorer_2016.jpg",
+"Image": null,
 "Price": 29999
 },
 {
@@ -20,7 +20,7 @@
 "Make": "Toyota",
 "Model": "Camry",
 "Year": 2016,
-"Image": "assets/toyota_camry_2016.jpg",
+"Image": null,
 "Price": 18999
 },
 {
