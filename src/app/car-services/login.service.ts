@@ -13,8 +13,13 @@ export class LoginService implements CanActivate {
   validateUser(username: string, password: string): Observable<User> {
 
     return this.remoteService.findUser(username, password).map(x => {
-      this.remoteService.canLogin = x.length > 0;
-      return x[0];
+      this.remoteService.canLogin = x && x.length === 1;
+
+      if (x && x.length > 1) {
+        alert('Too many users with identical credentials.');
+      }
+
+      return this.remoteService.canLogin ? x[0] : undefined;
     });
   }
 
