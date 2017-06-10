@@ -29,10 +29,8 @@ import { loginReducer } from './core/reducers/login.reducer';
     ReactiveFormsModule,
     routing,
     NgbModule.forRoot(),
-    StoreModule.provideStore({ login: loginReducer }),
-    StoreDevtoolsModule.instrumentOnlyWithExtension({
-      maxAge: 5
-    })
+    StoreModule.provideStore(loginReducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
   ],
   providers: [LoginService, RemoteService],
   bootstrap: [AppComponent]
