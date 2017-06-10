@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.0.
 
-Demo data can be found in [assets](https://github.com/carbonnolio/FredDev-Meetup-6-5-2017/tree/master/src/assets) folder. Check [../assets/users.json](https://github.com/carbonnolio/FredDev-Meetup-6-5-2017/tree/master/src/assets) for login credentials.
+Demo data can be found in [assets](https://github.com/carbonnolio/FredDev-Meetup-6-5-2017/tree/master/src/assets) folder. Check [../assets/users.json](https://github.com/carbonnolio/FredDev-Meetup-6-5-2017/tree/master/src/assets/users.json) for login credentials.
 
 ## Development server
 
