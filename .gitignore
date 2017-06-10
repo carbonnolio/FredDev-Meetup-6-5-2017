@@ -45,4 +45,5 @@ Thumbs.db
 /src/assets/*
 !.gitkeep
 !cars.json
+!users.json
 !no_car.png

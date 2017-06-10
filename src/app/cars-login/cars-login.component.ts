@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from './../car-services/login.service';
+
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-cars-login',
@@ -9,10 +11,11 @@ import { LoginService } from './../car-services/login.service';
   styleUrls: ['./cars-login.component.css'],
   providers: [LoginService]
 })
-export class CarsLoginComponent implements OnInit {
+export class CarsLoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
   failedLogin = false;
+  loginSub: ISubscription;
 
   constructor(private loginService: LoginService, private fb: FormBuilder, private router: Router) {
 
@@ -27,11 +30,18 @@ export class CarsLoginComponent implements OnInit {
   }
 
   onLoginClicked() {
-    this.failedLogin = !this.loginService.validateUser(this.loginForm.controls['userName'].value, this.loginForm.controls['password'].value);
+    this.loginSub = this.loginService.validateUser(this.loginForm.controls['userName'].value, this.loginForm.controls['password'].value)
+    .subscribe(x => {
+      this.failedLogin = !x;
 
-    if (!this.failedLogin) {
-      this.router.navigate(['cars']);
-    }
+      if (x) {
+        this.router.navigate(['cars', x]);
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.loginSub.unsubscribe();
   }
 
 }

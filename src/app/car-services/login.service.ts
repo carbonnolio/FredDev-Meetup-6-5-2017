@@ -3,15 +3,19 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Observable } from 'rxjs/Observable';
 import { RemoteService } from './remote.service';
 
+import { User } from './../cars/interfaces/user';
+
 @Injectable()
 export class LoginService implements CanActivate {
 
   constructor(private remoteService: RemoteService) { }
 
-  validateUser(username: string, password: string): boolean {
-    this.remoteService.canLogin = username === 'grigory' && password === 'helloworld';
+  validateUser(username: string, password: string): Observable<User> {
 
-    return this.remoteService.canLogin;
+    return this.remoteService.findUser(username, password).map(x => {
+      this.remoteService.canLogin = x.length > 0;
+      return x[0];
+    });
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
