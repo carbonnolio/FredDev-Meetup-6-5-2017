@@ -8,3 +8,14 @@
   border-right: 2px solid #b3d9ff;
 }
 
+.add-car-btn {
+  text-align: center;
+  cursor: pointer;
+    background-color: #b3d9ff;
+}
+
+.add-car-btn:hover {
+  cursor: pointer;
+  background-color: #0059b3;
+  color: white;
+}

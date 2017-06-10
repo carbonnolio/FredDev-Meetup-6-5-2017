@@ -18,7 +18,7 @@ export class DataService {
   getCars(): Observable<Car[]> {
     return this.http.get(this.url)
                     .map(x => x.json() || {})
-                    .delay(this.delay)
+                   // .delay(this.delay)
                     .catch(this.handleError);
   }
 

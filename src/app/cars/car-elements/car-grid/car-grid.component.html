@@ -2,5 +2,22 @@
   <div *ngFor="let car of cars" class="bordered-first bordered">
     <car-grid-row [car]="car" (onAdd)="onAddClicked($event)"></car-grid-row>
   </div>
-</div>Add new Car will be here...<div>
+  <div class="col-12 bordered-first bordered add-car-btn" (click)="open(content)">
+    <i class="fa fa-5x fa-plus-circle" aria-hidden="true"></i>
+  </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <add-new-car></add-new-car>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>

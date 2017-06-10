@@ -12,6 +12,8 @@ import { CarsNotFoundComponent } from './cars-not-found/cars-not-found.component
 import { LoginService } from './car-services/login.service';
 import { RemoteService } from './car-services/remote.service';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +25,7 @@ import { RemoteService } from './car-services/remote.service';
     CarsModule,
     ReactiveFormsModule,
     routing,
+    NgbModule.forRoot()
   ],
   providers: [LoginService, RemoteService],
   bootstrap: [AppComponent]

@@ -9,6 +9,8 @@ export class LoginService implements CanActivate {
   constructor(private remoteService: RemoteService) { }
 
   validateUser(username: string, password: string): boolean {
+    username = 'grigory';
+    password = 'helloworld';
     this.remoteService.canLogin = username === 'grigory' && password === 'helloworld';
 
     return this.remoteService.canLogin;

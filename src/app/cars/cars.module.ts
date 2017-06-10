@@ -15,18 +15,27 @@ import { DataService } from './../car-services/data.service';
 import { ShopService } from '../car-services/shop.service';
 
 import { routing } from './cars.routes';
+import { AddNewCarComponent } from '../cars/car-elements/add-new-car/add-new-car.component';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
     FormsModule,
-    routing
+    routing,
   ],
   exports: [
     CarsRootComponent
   ],
-  declarations: [CarsHeaderComponent, CarsRootComponent, CarsContainerComponent, CarsFooterComponent, CarGridComponent, CarGridRowComponent, ShoppingCartComponent],
+  declarations: [CarsHeaderComponent,
+    CarsRootComponent,
+    CarsContainerComponent,
+    CarsFooterComponent,
+    CarGridComponent,
+    CarGridRowComponent,
+    ShoppingCartComponent,
+    AddNewCarComponent,
+    ],
   providers: [CarService, DataService, ShopService]
 })
 export class CarsModule { }
