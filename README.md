@@ -5,6 +5,10 @@ The project was generated with [Angular CLI](https://github.com/angular/angular-
 
 Demo data can be found in [assets](https://github.com/carbonnolio/FredDev-Meetup-6-5-2017/tree/master/src/assets) folder. Check [../assets/users.json](https://github.com/carbonnolio/FredDev-Meetup-6-5-2017/tree/master/src/assets/users.json) for login credentials.
 
+## Update (6/11/2017)
+
+I am currently migrating the App State to Redux (with ngrx). Please install [redux dev tools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)(for Chrome) to observe app state at runtime.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
