@@ -15,7 +15,7 @@ import { RemoteService } from './car-services/remote.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { loginReducer } from './core/reducers/login.reducer';
+import { reducer } from '../core/reducers';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { loginReducer } from './core/reducers/login.reducer';
     ReactiveFormsModule,
     routing,
     NgbModule.forRoot(),
-    StoreModule.provideStore(loginReducer),
+    StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
   ],
   providers: [LoginService, RemoteService],
