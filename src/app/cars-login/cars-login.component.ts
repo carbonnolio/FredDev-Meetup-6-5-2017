@@ -1,47 +1,54 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LoginService } from './../car-services/login.service';
 
-import { ISubscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+
+import { Store } from '@ngrx/store';
+import { GET_USER_INFO } from '../../core/actions';
+import { AppState } from '../../core/app.state';
+import { LoginState } from '../../core/reducers';
 
 @Component({
   selector: 'app-cars-login',
   templateUrl: './cars-login.component.html',
-  styleUrls: ['./cars-login.component.css'],
-  providers: [LoginService]
+  styleUrls: ['./cars-login.component.css']
 })
 export class CarsLoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
-  failedLogin = false;
-  loginSub: ISubscription;
 
-  constructor(private loginService: LoginService, private fb: FormBuilder, private router: Router) {
+  loginState$: Observable<LoginState>;
+  loginStateSubscription: Subscription;
+
+  loginState: LoginState
+
+  constructor(private fb: FormBuilder, private store: Store<AppState>) {
 
     this.loginForm = this.fb.group({
       userName: ['', Validators.required],
       password: ['', Validators.required]
     });
 
+    this.loginState$ = store.select('login');
+
   }
 
   ngOnInit() {
+    this.loginStateSubscription = this.loginState$.subscribe((state) => {
+      this.loginState = state;
+    });
   }
 
   onLoginClicked() {
-    this.loginSub = this.loginService.validateUser(this.loginForm.controls['userName'].value, this.loginForm.controls['password'].value)
-    .subscribe(x => {
-      this.failedLogin = !x;
-
-      if (x) {
-        this.router.navigate(['cars', x]);
-      }
+    this.store.dispatch({
+      type: GET_USER_INFO,
+      payload: { providedUserName: this.loginForm.controls['userName'].value, providedPassword: this.loginForm.controls['password'].value }
     });
   }
 
   ngOnDestroy() {
-    this.loginSub.unsubscribe();
+    this.loginStateSubscription.unsubscribe();
   }
 
 }

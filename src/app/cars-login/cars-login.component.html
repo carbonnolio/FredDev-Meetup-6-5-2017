@@ -17,7 +17,7 @@
           </div>
         </div>
         <button type="button" class="btn btn-primary" (click)="onLoginClicked()">Login</button>
-        <div class="alert alert-danger" [hidden]="!failedLogin">
+        <div class="alert alert-danger" [hidden]="!loginState.loginSuccess && !loginState.getUserInfoSuccess">
           <strong>Incorrect user name or password provided.</strong>
         </div>
       </form>

@@ -1,30 +1,20 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { RemoteService } from './remote.service';
 
-import { User } from './../cars/interfaces/user';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../core/app.state';
+import { LoginState } from '../../core/reducers';
+
 
 @Injectable()
 export class LoginService implements CanActivate {
 
-  constructor(private remoteService: RemoteService) { }
+  constructor(private store: Store<AppState>) {}
 
-  validateUser(username: string, password: string): Observable<User> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
 
-    return this.remoteService.findUser(username, password).map(x => {
-      this.remoteService.canLogin = x && x.length === 1;
-
-      if (x && x.length > 1) {
-        alert('Too many users with identical credentials.');
-      }
-
-      return this.remoteService.canLogin ? x[0] : undefined;
-    });
-  }
-
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return this.remoteService.canLogin;
+    return this.store.select<LoginState>('login').map(x => x.loginSuccess);
   }
 
 }

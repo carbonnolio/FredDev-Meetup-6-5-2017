@@ -15,12 +15,12 @@ export class RemoteService {
 
   constructor(private http: Http) { }
 
-  findUser(name: string, password: string): Observable<User[]> {
+  // findUser(name: string, password: string): Observable<User[]> {
 
-    return this.http.get(this.url)
-      .map(x => x.json().filter(y => y.Name.toLowerCase() === name.toLowerCase() && y.Password === password) || {})
-      .catch(this.handleError);
-  }
+  //   return this.http.get(this.url)
+  //     .map(x => x.json().filter(y => y.Name.toLowerCase() === name.toLowerCase() && y.Password === password) || {})
+  //     .catch(this.handleError);
+  // }
 
   private handleError(error: any) {
     const err = error.toString();
