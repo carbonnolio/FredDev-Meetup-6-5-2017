@@ -35,8 +35,8 @@ export class CarsLoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loginStateSubscription = this.loginState$.subscribe((state) => {
-      this.loginState = state;
+    this.loginStateSubscription = this.loginState$.subscribe(x => {
+      this.loginState = x;
     });
   }
 

@@ -1,6 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ISubscription } from 'rxjs/Subscription';
+
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../core/app.state';
 
 @Component({
   selector: 'cars-root',
@@ -9,19 +13,23 @@ import { ISubscription } from 'rxjs/Subscription';
 })
 export class CarsRootComponent implements OnInit, OnDestroy {
 
-  userName: string
-  routeParams: ISubscription
+  appState$: Observable<AppState>;
+  appStateSubscription: Subscription;
 
-  constructor(private route: ActivatedRoute) { }
+  appState: AppState
+
+  constructor(private store: Store<AppState>) {
+    this.appState$ = store;
+   }
 
   ngOnInit() {
-    this.routeParams = this.route.params.subscribe(params => {
-       this.userName = params['FullName'];
+    this.appStateSubscription = this.appState$.subscribe(x => {
+      this.appState = x;
     });
   }
 
   ngOnDestroy() {
-    this.routeParams.unsubscribe();
+    this.appStateSubscription.unsubscribe();
   }
 
 }
