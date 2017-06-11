@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { GET_USER_INFO, GET_USER_INFO_FAILURE, LOGIN, LOGIN_FAILURE } from './../actions/login.actions';
+import { loginActions } from '../actions/';
 import { User } from '../../app/cars/interfaces/user';
 
 export interface LoginState {
@@ -20,9 +20,11 @@ const initialState: LoginState = {
 
 export function loginReducer(state: LoginState = initialState, action: Action): LoginState {
     switch (action.type) {
-        case GET_USER_INFO:
+        case loginActions.GET_USER_INFO:
             return Object.assign({}, state, action.payload);
-        case LOGIN:
+        case loginActions.GET_USER_INFO_FAILURE:
+            return state; // not inplemented.. yet
+        case loginActions.LOGIN:
 
             if (Array.isArray(action.payload) && action.payload.length > 0) {
                 const user = action.payload.filter(y => y.Name.toLowerCase() === state.providedUserName.toLowerCase() && y.Password === state.providedPassword);
@@ -34,8 +36,8 @@ export function loginReducer(state: LoginState = initialState, action: Action): 
 
             return Object.assign({}, state, { getUserInfoSuccess: true });
 
-        case LOGIN_FAILURE:
-            return state;
+        case loginActions.LOGIN_FAILURE:
+            return state; // not inplemented.. yet
         default:
             return state;
     }

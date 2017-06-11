@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Store } from '@ngrx/store';
-import { GET_USER_INFO } from '../../core/actions';
+import { loginActions } from '../../core/actions';
 import { AppState } from '../../core/app.state';
 import { LoginState } from '../../core/reducers';
 
@@ -42,7 +42,7 @@ export class CarsLoginComponent implements OnInit, OnDestroy {
 
   onLoginClicked() {
     this.store.dispatch({
-      type: GET_USER_INFO,
+      type: loginActions.GET_USER_INFO,
       payload: { providedUserName: this.loginForm.controls['userName'].value, providedPassword: this.loginForm.controls['password'].value }
     });
   }
