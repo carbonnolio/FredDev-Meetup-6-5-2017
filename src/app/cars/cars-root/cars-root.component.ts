@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../core/app.state';
+import { LoginState, CarState } from '../../../core/reducers';
 
 @Component({
   selector: 'cars-root',
@@ -13,23 +14,28 @@ import { AppState } from '../../../core/app.state';
 })
 export class CarsRootComponent implements OnInit, OnDestroy {
 
-  appState$: Observable<AppState>;
-  appStateSubscription: Subscription;
+  loginState$: Observable<LoginState>;
+  loginStateSubscription: Subscription;
 
-  appState: AppState
+  carState$: Observable<CarState>;
+  carStateSubscription: Subscription;
+
+  loginState: LoginState
+  carState: CarState
 
   constructor(private store: Store<AppState>) {
-    this.appState$ = store;
+    this.loginState$ = store.select('login');
+    this.carState$ = store.select('cars');
    }
 
   ngOnInit() {
-    this.appStateSubscription = this.appState$.subscribe(x => {
-      this.appState = x;
+    this.loginStateSubscription = this.loginState$.subscribe(x => {
+      this.loginState = x;
     });
   }
 
   ngOnDestroy() {
-    this.appStateSubscription.unsubscribe();
+    this.loginStateSubscription.unsubscribe();
   }
 
 }
