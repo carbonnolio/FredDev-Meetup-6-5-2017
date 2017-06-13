@@ -29,7 +29,7 @@ export class LoginEffects {
                 type: loginActions.LOGIN,
                 payload: x.json() || {}
             }))
-            .catch(() => Observable.of({ type: loginActions.GET_USER_INFO_FAILURE }))
+            .catch(err => Observable.of({ type: loginActions.GET_USER_INFO_FAILURE, requestError: err.ToString() }))
         );
 
     @Effect()
