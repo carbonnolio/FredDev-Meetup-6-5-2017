@@ -17,7 +17,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer } from '../core/reducers';
-import { LoginEffects } from '../core/effects/login.effects';
+import { LoginEffects, CarEffects } from '../core/effects';
 import { RouterStoreModule } from '@ngrx/router-store';
 
 @NgModule({
@@ -35,6 +35,7 @@ import { RouterStoreModule } from '@ngrx/router-store';
     StoreModule.provideStore(reducer),
     RouterStoreModule.connectRouter(),
     EffectsModule.run(LoginEffects),
+    EffectsModule.runAfterBootstrap(CarEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
   ],
   providers: [LoginService],

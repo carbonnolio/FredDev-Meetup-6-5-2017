@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, toPayload } from '@ngrx/effects';
-import { go } from '@ngrx/router-store';
 
-import { loginActions } from '../actions';
+import { carActions } from '../actions';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -12,22 +11,21 @@ import 'rxjs/add/operator/mapTo';
 import 'rxjs/add/observable/of';
 
 @Injectable()
-export class LoginEffects {
+export class CarEffects {
 
-    private url = 'assets/users.json';
+    private url = 'assets/cars.json';
+    private delay = 3000;
 
     constructor(private http: Http, private actions$: Actions) { }
 
     @Effect()
-    login$: Observable<Action> = this.actions$.ofType(loginActions.GET_USER_INFO).map(toPayload)
+    carData$: Observable<Action> = this.actions$.ofType(carActions.GET_CARS_DATA)
         .switchMap(payload => this.http.get(this.url)
             .map(x => ({
-                type: loginActions.LOGIN,
+                type: carActions.GET_CARS_DATA_SUCCESS,
                 payload: x.json() || {}
             }))
-            .catch(() => Observable.of({ type: loginActions.GET_USER_INFO_FAILURE }))
+            .delay(this.delay)
+            .catch(() => Observable.of({ type: carActions.GET_CARS_DATA_FAILURE }))
         );
-
-    @Effect()
-    navigateToCars$: Observable<Action> = this.actions$.ofType(loginActions.LOGIN).mapTo(go(['cars']));
 }

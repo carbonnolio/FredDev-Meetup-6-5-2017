@@ -8,6 +8,7 @@ export interface LoginState {
     providedPassword: string;
     getUserInfoSuccess: boolean;
     loginSuccess: boolean;
+    requestError: string;
 }
 
 const initialState: LoginState = {
@@ -15,7 +16,8 @@ const initialState: LoginState = {
     providedUserName: undefined,
     providedPassword: undefined,
     getUserInfoSuccess: false,
-    loginSuccess: false
+    loginSuccess: false,
+    requestError: undefined
 }
 
 export function loginReducer(state: LoginState = initialState, action: Action): LoginState {
