@@ -1,36 +1,34 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ISubscription } from 'rxjs/Subscription';
 
-import { Car } from './../interfaces/car';
+import { Car } from '../interfaces/car';
 
-import { DataService } from './../../car-services/data.service';
-import { ShopService } from './../../car-services/shop.service';
+import { ShopService } from '../../car-services/shop.service';
+
+import { CarState } from '../../../core/reducers';
 
 @Component({
   selector: 'cars-container',
   templateUrl: './cars-container.component.html',
   styleUrls: ['./cars-container.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CarsContainerComponent implements OnInit, OnDestroy {
+export class CarsContainerComponent implements OnInit {
+
+  @Input()
+  carState: CarState;
+
+  private originalCarlist: Car[];
+
+  private carList: Car[];
+
+  private purchasedCars: Car[] = [];
 
   private total = 0;
 
-  private originalCarlist: Car[];
-  private carList: Car[];
-  private purchasedCars: Car[] = [];
-
-  private dataProvider: ISubscription;
-
-  constructor(private dataService: DataService, private shopService: ShopService) { }
+  constructor(private shopService: ShopService) { }
 
   ngOnInit() {
-    this.dataProvider = this.dataService.getCars().subscribe(x => {
-      this.originalCarlist = x;
-      this.carList = this.originalCarlist;
-    },
-      err => {
-        console.error(err.toString());
-      });
   }
 
   onAddClicked(car: Car) {
@@ -53,10 +51,6 @@ export class CarsContainerComponent implements OnInit, OnDestroy {
 
   onSearchModelChange(filterVal: string) {
     this.carList = this.shopService.filterCars(filterVal, this.originalCarlist);
-  }
-
-  ngOnDestroy() {
-    this.dataProvider.unsubscribe();
   }
 
 }

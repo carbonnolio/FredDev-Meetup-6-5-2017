@@ -11,7 +11,6 @@ import { CarGridComponent } from './car-elements/car-grid/car-grid.component';
 import { CarService } from '../car-services/car.service';
 import { CarGridRowComponent } from './car-elements/car-grid-row/car-grid-row.component';
 import { ShoppingCartComponent } from './car-elements/shopping-cart/shopping-cart.component';
-import { DataService } from './../car-services/data.service';
 import { ShopService } from '../car-services/shop.service';
 
 import { routing } from './cars.routes';
@@ -36,6 +35,6 @@ import { AddNewCarComponent } from '../cars/car-elements/add-new-car/add-new-car
     ShoppingCartComponent,
     AddNewCarComponent,
     ],
-  providers: [CarService, DataService, ShopService]
+  providers: [CarService, ShopService]
 })
 export class CarsModule { }

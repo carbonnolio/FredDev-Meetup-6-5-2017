@@ -6,8 +6,12 @@ import { Actions, Effect, toPayload } from '@ngrx/effects';
 import { carActions } from '../actions';
 
 import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mapTo';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/of';
 
 @Injectable()

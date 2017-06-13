@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+
 import { Action } from '@ngrx/store';
 import { Actions, Effect, toPayload } from '@ngrx/effects';
 import { go } from '@ngrx/router-store';
@@ -7,9 +8,12 @@ import { go } from '@ngrx/router-store';
 import { loginActions } from '../actions';
 
 import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mapTo';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class LoginEffects {

@@ -1,16 +1,16 @@
-<div *ngIf="carList; else wait">
+<div *ngIf="carState.carList; else wait">
     <div class="row margin">
-        <input *ngIf="originalCarlist.length > 0" type="text" class="form-control" ngModel (ngModelChange)="onSearchModelChange($event)"
+        <input *ngIf="carState.originalCarList.length > 0" type="text" class="form-control" ngModel (ngModelChange)="onSearchModelChange($event)"
             placeholder="Search...">
     </div>
     <div class="margin">
-        <car-grid [cars]="carList" (onAdd)="onAddClicked($event)"></car-grid>
+        <car-grid [cars]="carState.carList" (onAdd)="onAddClicked($event)"></car-grid>
     </div>
     <div class="row margin">
         <div class="col-xs-3 col-md-3 shopping-cart">
             <p>Shopping Cart:</p>
         </div>
-        <div *ngIf="purchasedCars.length > 0" class="col-xs-3 col-md-3 offset-xs-6 offset-md-6 shopping-cart">
+        <div *ngIf="carState.purchasedCarList.length > 0" class="col-xs-3 col-md-3 offset-xs-6 offset-md-6 shopping-cart">
             <p>Total: {{total | currency:'USD':true:'1.2-2'}}</p>
         </div>
     </div>
