@@ -50,6 +50,19 @@ export function carReducer(state: CarState = initialState, action: Action): CarS
 
             return state;
 
+        case carActions.REMOVE_CAR_FROM_SHOPPING_CART:
+
+            if (action.payload) {
+                const purchasedCars = move(action.payload, state.purchasedCarList, state.carList);
+                const originalCarlist = state.originalCarList.concat(action.payload);
+
+                const total = purchasedCars.to ? state.total - action.payload.Price : 0;
+
+                return Object.assign({}, state, { originalCarList: originalCarlist, carList: purchasedCars.to, purchasedCarList: purchasedCars.from, total: total });
+            }
+
+            return state;
+
         default:
             return state;
     }

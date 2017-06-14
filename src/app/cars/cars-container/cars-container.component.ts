@@ -21,6 +21,9 @@ export class CarsContainerComponent implements OnInit {
   @Output()
   onAdd: EventEmitter<Car> = new EventEmitter();
 
+  @Output()
+  onRemove: EventEmitter<Car> = new EventEmitter();
+
   private originalCarlist: Car[];
 
   private carList: Car[];
@@ -46,12 +49,13 @@ export class CarsContainerComponent implements OnInit {
   }
 
   onRemoveClicked(car: Car) {
-    //this.carList = this.shopService.move(car, this.purchasedCars, this.carList);
-    this.originalCarlist = this.originalCarlist.concat(car);
+    this.onRemove.emit(car);
+    // this.carList = this.shopService.move(car, this.purchasedCars, this.carList);
+    // this.originalCarlist = this.originalCarlist.concat(car);
 
-    if (this.carList) {
-      this.total -= car.Price;
-    }
+    // if (this.carList) {
+    //   this.total -= car.Price;
+    // }
   }
 
   onSearchModelChange(filterVal: string) {

@@ -47,6 +47,10 @@ export class CarsRootComponent implements OnInit, OnDestroy {
     this.store.dispatch({ type: carActions.ADD_CAR_TO_SHOPPING_CART, payload: car });
   }
 
+  onRemoveClicked(car: Car) {
+    this.store.dispatch({ type: carActions.REMOVE_CAR_FROM_SHOPPING_CART, payload: car });
+  }
+
   ngOnDestroy() {
     this.loginStateSubscription.unsubscribe();
     this.carStateSubscription.unsubscribe();
