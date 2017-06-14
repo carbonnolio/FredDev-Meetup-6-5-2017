@@ -63,6 +63,12 @@ export function carReducer(state: CarState = initialState, action: Action): CarS
 
             return state;
 
+        case carActions.SEARCH_CAR_FIELD_CHANGED:
+
+            const carList = filterCars(action.payload, state.originalCarList);
+
+            return Object.assign({}, state, { carList: carList });
+
         default:
             return state;
     }
@@ -83,3 +89,7 @@ const move = (car: Car, from: Car[], to: Car[]): any => {
 
     return undefined;
   }
+
+const filterCars = (filterVal: string, coll: Car[]): Car[] => {
+    return coll.filter(x => Object.keys(x).filter(y => y !== 'Image' && y !== 'Id').map(y => x[y]).join(',').toLowerCase().indexOf(filterVal.toLowerCase()) > -1);
+}
