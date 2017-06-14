@@ -6,6 +6,7 @@ import { Actions, Effect, toPayload } from '@ngrx/effects';
 import { go } from '@ngrx/router-store';
 
 import { loginActions } from '../actions';
+import { handleError } from '../shared/shared.effects';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -29,9 +30,12 @@ export class LoginEffects {
                 type: loginActions.LOGIN,
                 payload: x.json() || {}
             }))
-            .catch(err => Observable.of({ type: loginActions.GET_USER_INFO_FAILURE, requestError: err.ToString() }))
+            .catch(err => Observable.of({ type: loginActions.GET_USER_INFO_FAILURE, payload: { requestError: err.toString() } }))
         );
 
     @Effect()
     navigateToCars$: Observable<Action> = this.actions$.ofType(loginActions.LOGIN).mapTo(go(['cars']));
+
+    @Effect()
+    showError$: Observable<Action> = handleError(this.actions$, loginActions.GET_USER_INFO_FAILURE, loginActions.DISPLAY_LOGIN_FAILURE_MESSEGE);
 }

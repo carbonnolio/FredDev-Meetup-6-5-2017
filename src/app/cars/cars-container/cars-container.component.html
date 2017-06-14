@@ -11,11 +11,11 @@
             <p>Shopping Cart:</p>
         </div>
         <div *ngIf="carState.purchasedCarList.length > 0" class="col-xs-3 col-md-3 offset-xs-6 offset-md-6 shopping-cart">
-            <p>Total: {{total | currency:'USD':true:'1.2-2'}}</p>
+            <p>Total: {{carState.total | currency:'USD':true:'1.2-2'}}</p>
         </div>
     </div>
     <div class="row">
-        <shopping-cart [purchasedCars]="purchasedCars" (onRemove)="onRemoveClicked($event)"></shopping-cart>
+        <shopping-cart [purchasedCars]="carState.purchasedCarList" (onRemove)="onRemoveClicked($event)"></shopping-cart>
     </div>
 </div>
 

@@ -4,6 +4,7 @@ import { Action } from '@ngrx/store';
 import { Actions, Effect, toPayload } from '@ngrx/effects';
 
 import { carActions } from '../actions';
+import { handleError } from '../shared/shared.effects';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -30,6 +31,9 @@ export class CarEffects {
                 payload: x.json() || {}
             }))
             .delay(this.delay)
-            .catch(() => Observable.of({ type: carActions.GET_CARS_DATA_FAILURE }))
+            .catch(err => Observable.of({ type: carActions.GET_CARS_DATA_FAILURE, payload: { requestError: err.toString() } }))
         );
+
+    @Effect()
+    showError$: Observable<Action> = handleError(this.actions$, carActions.GET_CARS_DATA_FAILURE, carActions.DISPLAY_GET_CARS_DATA_FAILURE_MESSEGE);
 }

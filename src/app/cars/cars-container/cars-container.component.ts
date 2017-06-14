@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { ISubscription } from 'rxjs/Subscription';
 
 import { Car } from '../interfaces/car';
@@ -18,6 +18,9 @@ export class CarsContainerComponent implements OnInit {
   @Input()
   carState: CarState;
 
+  @Output()
+  onAdd: EventEmitter<Car> = new EventEmitter();
+
   private originalCarlist: Car[];
 
   private carList: Car[];
@@ -32,16 +35,18 @@ export class CarsContainerComponent implements OnInit {
   }
 
   onAddClicked(car: Car) {
-    this.purchasedCars = this.shopService.move(car, this.carList, this.purchasedCars);
-    this.originalCarlist = this.originalCarlist.filter(x => x.Id !== car.Id);
+    this.onAdd.emit(car);
 
-    if (this.purchasedCars) {
-      this.total += car.Price;
-    }
+    // this.purchasedCars = this.shopService.move(car, this.carList, this.purchasedCars);
+    // this.originalCarlist = this.originalCarlist.filter(x => x.Id !== car.Id);
+
+    // if (this.purchasedCars) {
+    //   this.total += car.Price;
+    // }
   }
 
   onRemoveClicked(car: Car) {
-    this.carList = this.shopService.move(car, this.purchasedCars, this.carList);
+    //this.carList = this.shopService.move(car, this.purchasedCars, this.carList);
     this.originalCarlist = this.originalCarlist.concat(car);
 
     if (this.carList) {

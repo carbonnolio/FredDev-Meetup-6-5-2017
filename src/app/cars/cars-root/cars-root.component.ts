@@ -8,6 +8,8 @@ import { AppState } from '../../../core/app.state';
 import { LoginState, CarState } from '../../../core/reducers';
 import { carActions } from '../../../core/actions';
 
+import { Car } from '../interfaces';
+
 @Component({
   selector: 'cars-root',
   templateUrl: './cars-root.component.html',
@@ -39,6 +41,10 @@ export class CarsRootComponent implements OnInit, OnDestroy {
     });
 
     this.store.dispatch({ type: carActions.GET_CARS_DATA });
+  }
+
+  onAddClicked(car: Car) {
+    this.store.dispatch({ type: carActions.ADD_CAR_TO_SHOPPING_CART, payload: car });
   }
 
   ngOnDestroy() {
