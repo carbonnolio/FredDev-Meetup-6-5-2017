@@ -27,10 +27,10 @@ import { RouterStoreModule } from '@ngrx/router-store';
     CarsNotFoundComponent,
   ],
   imports: [
+    routing,
     BrowserModule,
     CarsModule,
     ReactiveFormsModule,
-    routing,
     NgbModule.forRoot(),
     StoreModule.provideStore(reducer),
     RouterStoreModule.connectRouter(),
