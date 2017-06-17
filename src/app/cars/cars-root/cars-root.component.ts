@@ -55,6 +55,14 @@ export class CarsRootComponent implements OnInit, OnDestroy {
     this.store.dispatch({ type: carActions.SEARCH_CAR_FIELD_CHANGED, payload: searchVal });
   }
 
+  onFormChangedEvent(valid: boolean) {
+    this.store.dispatch({ type: carActions.NEW_VEHICLE_FORM_CHANGED, payload: valid });
+  }
+
+  onAddNewCarEvent(newCar: Car) {
+    this.store.dispatch({ type: carActions.ADD_NEW_VEHICLE, payload: newCar });
+  }
+
   ngOnDestroy() {
     this.loginStateSubscription.unsubscribe();
     this.carStateSubscription.unsubscribe();

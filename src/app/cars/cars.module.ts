@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { CarsHeaderComponent } from './cars-header/cars-header.component';
@@ -21,6 +22,7 @@ import { AddNewCarComponent } from '../cars/car-elements/add-new-car/add-new-car
     CommonModule,
     HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     routing,
   ],
   exports: [

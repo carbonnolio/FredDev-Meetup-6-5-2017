@@ -4,7 +4,8 @@
             placeholder="Search...">
     </div>
     <div class="margin">
-        <car-grid [cars]="carState.carList" (onAdd)="onAddClicked($event)"></car-grid>
+        <car-grid [cars]="carState.carList" [formValid]="carState.formValid" (onAdd)="onAddClicked($event)" (onFormChanged)="onFormChangedEvent($event)"
+            (onAddNewCar)="onAddNewCarEvent($event)"></car-grid>
     </div>
     <div class="row margin">
         <div class="col-xs-3 col-md-3 shopping-cart">

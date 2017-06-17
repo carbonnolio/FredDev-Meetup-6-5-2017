@@ -1,5 +1,6 @@
 <cars-header [userName]="loginState.user.FullName"></cars-header>
 <div class="center-container">
-  <cars-container [carState]="carState" (onAdd)="onAddClicked($event)" (onRemove)="onRemoveClicked($event)" (onSearch)="onSearchChanged($event)"></cars-container>
+  <cars-container [carState]="carState" (onAdd)="onAddClicked($event)" (onRemove)="onRemoveClicked($event)" (onSearch)="onSearchChanged($event)"
+    (onFormChanged)="onFormChangedEvent($event)" (onAddNewCar)="onAddNewCarEvent($event)"></cars-container>
 </div>
-<cars-footer  class="cust-footer"></cars-footer>
+<cars-footer class="cust-footer"></cars-footer>

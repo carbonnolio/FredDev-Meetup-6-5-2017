@@ -9,15 +9,15 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">Modal title</h4>
+    <h4 class="modal-title">Add New Vehicle</h4>
     <button type="button" class="close" aria-label="Close" (click)="d()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <add-new-car></add-new-car>
+    <add-new-car #newCar (onFormChanged)="onFormChangedEvent($event)"></add-new-car>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+    <button type="button" class="btn btn-secondary" (click)="c(newCar)" [disabled]="!formValid">Submit</button>
   </div>
 </ng-template>

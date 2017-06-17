@@ -9,6 +9,7 @@ export interface CarState {
     carList: Car[];
     purchasedCarList: Car[];
     requestError: string;
+    formValid: boolean;
 }
 
 const initialState: CarState = {
@@ -17,7 +18,8 @@ const initialState: CarState = {
     originalCarList: undefined,
     carList: undefined,
     purchasedCarList: [],
-    requestError: undefined
+    requestError: undefined,
+    formValid: false
 }
 
 export function carReducer(state: CarState = initialState, action: Action): CarState {
@@ -26,9 +28,10 @@ export function carReducer(state: CarState = initialState, action: Action): CarS
             return Object.assign({}, state, action.payload);
 
         case carActions.GET_CARS_DATA_SUCCESS:
-        if (Array.isArray(action.payload) && action.payload.length > 0) {
-            return Object.assign({}, state, { loaded: true, originalCarList: action.payload, carList: action.payload });
-        }
+            if (Array.isArray(action.payload) && action.payload.length > 0) {
+                return Object.assign({}, state, { loaded: true, originalCarList: action.payload, carList: action.payload });
+            }
+
             return Object.assign({}, state, { loaded: true });
 
         case carActions.GET_CARS_DATA_FAILURE:
@@ -38,7 +41,6 @@ export function carReducer(state: CarState = initialState, action: Action): CarS
             return Object.assign({}, state, action.payload);
 
         case carActions.ADD_CAR_TO_SHOPPING_CART:
-
             if (action.payload) {
                 const purchasedCars = move(action.payload, state.carList, state.purchasedCarList);
                 const originalCarlist = state.originalCarList.filter(x => x.Id !== action.payload.Id);
@@ -51,7 +53,6 @@ export function carReducer(state: CarState = initialState, action: Action): CarS
             return state;
 
         case carActions.REMOVE_CAR_FROM_SHOPPING_CART:
-
             if (action.payload) {
                 const purchasedCars = move(action.payload, state.purchasedCarList, state.carList);
                 const originalCarlist = state.originalCarList.concat(action.payload);
@@ -64,10 +65,17 @@ export function carReducer(state: CarState = initialState, action: Action): CarS
             return state;
 
         case carActions.SEARCH_CAR_FIELD_CHANGED:
-
             const carList = filterCars(action.payload, state.originalCarList);
 
             return Object.assign({}, state, { carList: carList });
+
+        case carActions.NEW_VEHICLE_FORM_CHANGED:
+            return Object.assign({}, state, { formValid: action.payload });
+
+        case carActions.ADD_NEW_VEHICLE:
+            action.payload.Id = Math.max(...state.originalCarList.map(x => x.Id)) + 1;
+
+            return Object.assign({}, state, { originalCarList: state.originalCarList.concat(action.payload), carList: state.carList.concat(action.payload), formValid: false });
 
         default:
             return state;
@@ -77,18 +85,18 @@ export function carReducer(state: CarState = initialState, action: Action): CarS
 const move = (car: Car, from: Car[], to: Car[]): any => {
 
     if (from && to) {
-      const carIdx = from.indexOf(car);
+        const carIdx = from.indexOf(car);
 
-      if (car && carIdx > -1) {
-        const item = from.splice(carIdx, 1);
-        const c = item[0];
-        to = to.concat(item);
-        return { to, from };
-      }
+        if (car && carIdx > -1) {
+            const item = from.splice(carIdx, 1);
+            const c = item[0];
+            to = to.concat(item);
+            return { to, from };
+        }
     }
 
     return undefined;
-  }
+}
 
 const filterCars = (filterVal: string, coll: Car[]): Car[] => {
     return coll.filter(x => Object.keys(x).filter(y => y !== 'Image' && y !== 'Id').map(y => x[y]).join(',').toLowerCase().indexOf(filterVal.toLowerCase()) > -1);

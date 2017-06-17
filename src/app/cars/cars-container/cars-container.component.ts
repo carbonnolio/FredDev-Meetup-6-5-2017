@@ -24,6 +24,12 @@ export class CarsContainerComponent implements OnInit {
   @Output()
   onSearch: EventEmitter<string> = new EventEmitter();
 
+  @Output()
+  onFormChanged: EventEmitter<boolean> = new EventEmitter();
+
+  @Output()
+  onAddNewCar: EventEmitter<Car> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
@@ -38,8 +44,15 @@ export class CarsContainerComponent implements OnInit {
   }
 
   onSearchModelChange(filterVal: string) {
-    // this.carList = this.shopService.filterCars(filterVal, this.originalCarlist);
     this.onSearch.emit(filterVal);
+  }
+
+  onFormChangedEvent(valid: boolean) {
+    this.onFormChanged.emit(valid);
+  }
+
+  onAddNewCarEvent(newCar: Car) {
+    this.onAddNewCar.emit(newCar);
   }
 
 }
