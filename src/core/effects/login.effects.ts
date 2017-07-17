@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { Action } from '@ngrx/store';
-import { Actions, Effect, toPayload } from '@ngrx/effects';
+import { Actions, Effect } from '@ngrx/effects';
 import { go } from '@ngrx/router-store';
 
 import { loginActions } from '../actions';
@@ -24,7 +24,7 @@ export class LoginEffects {
     constructor(private http: Http, private actions$: Actions) { }
 
     @Effect()
-    login$: Observable<Action> = this.actions$.ofType(loginActions.GET_USER_INFO).map(toPayload)
+    login$: Observable<Action> = this.actions$.ofType(loginActions.GET_USER_INFO)
         .switchMap(payload => this.http.get(this.url)
             .map(x => ({
                 type: loginActions.LOGIN,
